@@ -25,9 +25,13 @@ function liriStart() {
 		if (inquirerResponse.userInput === "my-tweets") {
 			lastTweets();
 		}
+		else if (inquirerResponse.userInput === "goodbye") {
+			liriEnd();
+		}
 		else {
 			console.log("I'm sorry, here are your options:")
 			console.log("my-tweets");
+			console.log("goodbye")
 			console.log("");
 			liriStart();
 		}
@@ -35,6 +39,13 @@ function liriStart() {
 }
 // liriStart() ==============================================
 
+
+//liriEnd() - ends the program
+function liriEnd() {
+	console.log("Goodbye");
+	process.exit();
+}
+//liriEnd() =================================================
 
 // lastTweets() - prints the last 20 tweets
 function lastTweets() {
