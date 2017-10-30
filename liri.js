@@ -48,6 +48,7 @@ var client = new Twitter({
 
 
 var params = {screen_name: 'ChickenTrashcan'};
+
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
     
@@ -56,10 +57,14 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
   		console.log("");
   		console.log(tweets[i].text);
   	}
+  	console.log("");
+
+  	liriStart();
+
   }
 });
-	
-liriStart();
+
+
 
 }
 // lastTweets() ===============================================
