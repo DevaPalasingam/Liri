@@ -3,23 +3,7 @@ var importKeys = require('./keys.js');
 var Twitter = require('twitter');
 var inquirer = require("inquirer");
 
-
-
-inquirer.prompt([
-	{
-		type: "input",
-		message: "What can I do for you?",
-		name: "userInput"
-	}
-]).then(function(inquirerResponse) {
-	if (inquirerResponse.userInput === "my-tweets") {
-		lastTweets();
-	}
-	else {
-		console.log("I'm sorry, here are your options:")
-		console.log("my-tweets");
-	}
-});
+liriStart();
 
 
 
@@ -29,6 +13,30 @@ inquirer.prompt([
 
 
 
+// liriStart() - starting prompt for liri
+function liriStart() {
+	inquirer.prompt([
+		{
+			type: "input",
+			message: "What can I do for you?",
+			name: "userInput"
+		}
+	]).then(function(inquirerResponse) {
+		if (inquirerResponse.userInput === "my-tweets") {
+			lastTweets();
+		}
+		else {
+			console.log("I'm sorry, here are your options:")
+			console.log("my-tweets");
+			console.log("");
+			liriStart();
+		}
+	});
+}
+// liriStart() ==============================================
+
+
+// lastTweets() - prints the last 20 tweets
 function lastTweets() {
 
 var client = new Twitter({
@@ -48,10 +56,10 @@ client.get('statuses/user_timeline', params, function(error, tweets, response) {
   		console.log("");
   		console.log(tweets[i].text);
   	}
-
-
-    debugger;
   }
 });
+	
+liriStart();
 
 }
+// lastTweets() ===============================================
