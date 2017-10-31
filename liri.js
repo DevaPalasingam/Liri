@@ -32,11 +32,15 @@ function liriStart() {
 		
 		//checks for spotify-this-song and input song. If no song is input, will default to "The Sign"
 		else if (checkString[0] === "spotify-this-song") {
+			//this checks if user input a song
 			if(checkString.length > 1) {
+				//if user put in a song, this will splice out the initial command and then will put additional words in an array
 				var sendString = checkString.splice(1);
+				//this will then concat those additional words back together
 				var inputSong = concat(sendString);
 				spotifySearch(inputSong);
 			}
+			//if no input song was put in, will default to "The Sign"
 			else {
 				spotifySearch("The Sign")
 			}
@@ -48,6 +52,7 @@ function liriStart() {
 		
 		else {
 			console.log("I'm sorry, here are your options:")
+			console.log("");
 			console.log("my-tweets");
 			console.log("spotify-this-song <insert song name>");
 			console.log("goodbye");
@@ -130,12 +135,14 @@ function spotifySearch(userInput) {
 
 //concat(array) - takes an input array of strings and then concats them into one string
 function concat (array) {
+	//if only one word was given, then just returns that word
 	if (array.length === 1) {
 		return array[0];
 	}
 
 	var newString = array[0];
 
+	//will create a new string that concats the different words in the array with " " in between them
 	for(var i = 1; i < array.length; i++) {
 		newString = newString.concat(" ");
 		newString = newString.concat(array[i]);
