@@ -102,7 +102,7 @@ function doIt() {
 
 		// if a parameter was given, this will remove the quotes around it
 		if(data.length > 1) {
-			var data[1] = data[1].substring(1, data[1].length-1);
+			data[1] = data[1].substring(1, data[1].length-1);
 		}
 
 
@@ -123,10 +123,8 @@ function doIt() {
 			//this checks if user input a song
 			if(data.length > 1) {
 				//if user put in a song, this will splice out the initial command and then will put additional words in an array
-				var sendString = data[1].splice(1);
-				//this will then concat those additional words back together
-				var inputSong = concat(sendString);
-				spotifySearch(inputSong);
+				var sendString = data[1];
+				spotifySearch(sendString);
 			}
 			//if no input song was put in, will default to "The Sign"
 			else {
@@ -138,9 +136,11 @@ function doIt() {
 		else if (data[0] === "movie-this") {
 			if(data.length > 1) {
 				//if user put in a movie, this will splice out the initial command and then will put additional words in an array
-				var sendString = data[1].splice(1);
+				var sendString = data[1];
+				//console.log("sendString movie: " + sendString);
 				//this will then concat those additional words back together
-				var inputMovie = concatPlus(sendString);
+				var inputMovie = sendString.split(' ').join('+');
+				//console.log("inputMovie: " + inputMovie);
 				movieLookup(inputMovie);
 			}
 			//if no input movie was put in, will default to "Mr. Nobody"
