@@ -3,6 +3,7 @@ var importKeys = require('./keys.js');
 var Twitter = require("twitter");
 var inquirer = require("inquirer");
 var Spotify = require("node-spotify-api");
+var request = require("request");
 
 liriStart();
 
@@ -45,6 +46,22 @@ function liriStart() {
 				spotifySearch("The Sign")
 			}
 		}
+
+		//checks for movie-this and input movie. If no movie is input, will default to "Mr. Nobody"
+		else if (checkString[0] === "movie-this") {
+			if(checkString.length > 1) {
+				//if user put in a movie, this will splice out the initial command and then will put additional words in an array
+				var sendString = checkString.splice(1);
+				//this will then concat those additional words back together
+				var inputMovie = concat(sendString);
+				movieLookup(inputMovie);
+			}
+			//if no input movie was put in, will default to "Mr. Nobody"
+			else {
+				movieLookup("Mr. Nobody");
+			}
+		}
+
 		
 		else if (checkString[0] === "goodbye") {
 			liriEnd();
@@ -55,6 +72,7 @@ function liriStart() {
 			console.log("");
 			console.log("my-tweets");
 			console.log("spotify-this-song <insert song name>");
+			console.log("movie-this <insert movie name>");
 			console.log("goodbye");
 			console.log("");
 			liriStart();
@@ -131,6 +149,13 @@ function spotifySearch(userInput) {
 
 }
 // spotifySearch() ==========================================
+
+
+//movieLookup()
+function movieLookup(userInput) {
+	
+}
+//movieLookup() =============================================
 
 
 //concat(array) - takes an input array of strings and then concats them into one string

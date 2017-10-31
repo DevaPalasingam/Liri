@@ -13,5 +13,6 @@ var spotifyKeys = {
 
 module.exports = {
 	twitterKeys: twitterKeys,
-	spotifyKeys: spotifyKeys
+	spotifyKeys: spotifyKeys,
+	omdbapiKey: "40e9cece"
 };
