@@ -33,7 +33,9 @@ function liriStart() {
 		//checks for spotify-this-song and input song. If no song is input, will default to "The Sign"
 		else if (checkString[0] === "spotify-this-song") {
 			if(checkString.length > 1) {
-				spotifySearch(checkString[1]);
+				var sendString = checkString.splice(1);
+				var inputSong = concat(sendString);
+				spotifySearch(inputSong);
 			}
 			else {
 				spotifySearch("The Sign")
@@ -126,12 +128,19 @@ function spotifySearch(userInput) {
 // spotifySearch() ==========================================
 
 
+//concat(array) - takes an input array of strings and then concats them into one string
 function concat (array) {
 	if (array.length === 1) {
 		return array[0];
 	}
 
-	for(var i = 0; i < array.length; i++) {
+	var newString = array[0];
 
+	for(var i = 1; i < array.length; i++) {
+		newString = newString.concat(" ");
+		newString = newString.concat(array[i]);
 	}
+
+	return newString;
 }
+//concat(array) ===========================================
