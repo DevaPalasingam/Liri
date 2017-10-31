@@ -116,7 +116,7 @@ function spotifySearch(userInput) {
 	    return console.log('Error occurred: ' + err);
 	  	}
 	 
-	 	for(var i = 0; i < 20; i++) {
+	 	for(var i = 0; i < data.tracks.items.length && i < 20; i++) {
 	 		console.log("");
 	 		console.log(data.tracks.items[i].artists[0].name);
 	 		console.log(data.tracks.items[i].name);
