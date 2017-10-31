@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/DevaPalasingam/liri-node-app#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
     "inquirer": "^3.3.0",
     "node-spotify-api": "^1.0.7",
     "request": "^2.83.0",

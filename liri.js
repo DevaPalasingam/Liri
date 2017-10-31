@@ -1,9 +1,10 @@
-var importKeys = require('./keys.js');
+var importKeys = require("./keys.js");
 
 var Twitter = require("twitter");
 var inquirer = require("inquirer");
 var Spotify = require("node-spotify-api");
 var request = require("request");
+var fs = require("fs");
 
 liriStart();
 
@@ -80,6 +81,14 @@ function liriStart() {
 	});
 }
 // liriStart() ==============================================
+
+
+// doIt() - this function will read the random.txt and do whatever is written in it
+function doIt() {
+
+}
+// doIt() ==============================================
+
 
 
 //liriEnd() - ends the program
