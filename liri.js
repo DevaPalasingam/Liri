@@ -53,12 +53,12 @@ function liriStart() {
 				//if user put in a movie, this will splice out the initial command and then will put additional words in an array
 				var sendString = checkString.splice(1);
 				//this will then concat those additional words back together
-				var inputMovie = concat(sendString);
+				var inputMovie = concatPlus(sendString);
 				movieLookup(inputMovie);
 			}
 			//if no input movie was put in, will default to "Mr. Nobody"
 			else {
-				movieLookup("Mr. Nobody");
+				movieLookup("mr+nobody");
 			}
 		}
 
@@ -153,7 +153,23 @@ function spotifySearch(userInput) {
 
 //movieLookup()
 function movieLookup(userInput) {
-	
+	var movieUrl = "http://www.omdbapi.com/?t=" + userInput + "&y=&plot=full&apikey=" + importKeys.omdbapiKey;
+
+	request(movieUrl, function (error, response, body) {
+	if (!error) {
+		var movieInfo = JSON.parse(body);
+		console.log("Title: " + movieInfo.Title);
+		console.log("Year: " + movieInfo.Year);
+		console.log("IMDB Rating: " + movieInfo.Ratings[0].Value);
+		console.log("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value);
+		console.log("Country: " + movieInfo.Country);
+		console.log("Language: " + movieInfo.Language);
+		console.log("Plot: " + movieInfo.Plot);
+		console.log("Actors: " + movieInfo.Actors);
+		console.log("");
+		liriStart();
+	}
+});
 }
 //movieLookup() =============================================
 
@@ -176,3 +192,22 @@ function concat (array) {
 	return newString;
 }
 //concat(array) ===========================================
+
+//concatPlus(array) - takes an input array of strings and then concats them into one string with "+" in between each word
+function concatPlus (array) {
+	//if only one word was given, then just returns that word
+	if (array.length === 1) {
+		return array[0];
+	}
+
+	var newString = array[0];
+
+	//will create a new string that concats the different words in the array with " " in between them
+	for(var i = 1; i < array.length; i++) {
+		newString = newString.concat("+");
+		newString = newString.concat(array[i]);
+	}
+
+	return newString;
+}
+//concatPlus(array) ===========================================
