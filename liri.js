@@ -1,10 +1,10 @@
 var importKeys = require('./keys.js');
 
-var Twitter = require('twitter');
+var Twitter = require("twitter");
 var inquirer = require("inquirer");
+var Spotify = require("node-spotify-api");
 
 liriStart();
-
 
 
 
@@ -22,16 +22,33 @@ function liriStart() {
 			name: "userInput"
 		}
 	]).then(function(inquirerResponse) {
-		if (inquirerResponse.userInput === "my-tweets") {
+
+		// this line will take the input words into an array
+		var checkString = inquirerResponse.userInput.split(" ");
+
+		if (checkString[0] === "my-tweets") {
 			lastTweets();
 		}
-		else if (inquirerResponse.userInput === "goodbye") {
+		
+		//checks for spotify-this-song and input song. If no song is input, will default to "The Sign"
+		else if (checkString[0] === "spotify-this-song") {
+			if(checkString.length > 1) {
+				spotifySearch(checkString[1]);
+			}
+			else {
+				spotifySearch("The Sign")
+			}
+		}
+		
+		else if (checkString[0] === "goodbye") {
 			liriEnd();
 		}
+		
 		else {
 			console.log("I'm sorry, here are your options:")
 			console.log("my-tweets");
-			console.log("goodbye")
+			console.log("spotify-this-song <insert song name>");
+			console.log("goodbye");
 			console.log("");
 			liriStart();
 		}
@@ -47,6 +64,8 @@ function liriEnd() {
 }
 //liriEnd() =================================================
 
+
+
 // lastTweets() - prints the last 20 tweets
 function lastTweets() {
 
@@ -61,21 +80,58 @@ var client = new Twitter({
 var params = {screen_name: 'ChickenTrashcan'};
 
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  if (!error) {
-    
+  	if (!error) {
+	  	for(var i = 0; i < 20; i ++) {
+	  		console.log("");
+	  		console.log(tweets[i].text);
+	  	}
+	  	console.log("");
 
-  	for(var i = 0; i < 20; i ++) {
-  		console.log("");
-  		console.log(tweets[i].text);
+	  	liriStart();
   	}
-  	console.log("");
-
-  	liriStart();
-
-  }
 });
 
 
 
 }
 // lastTweets() ===============================================
+
+
+// spotifySearch() - looks up song info on spotify
+function spotifySearch(userInput) {
+	var spotify = new Spotify({
+	id: importKeys.spotifyKeys.id,
+	secret: importKeys.spotifyKeys.secret
+	});
+
+	spotify.search({ type: 'track', query: userInput }, function(err, data) {
+	  	if (err) {
+	    return console.log('Error occurred: ' + err);
+	  	}
+	 
+	 	for(var i = 0; i < 20; i++) {
+	 		console.log("");
+	 		console.log(data.tracks.items[i].artists[0].name);
+	 		console.log(data.tracks.items[i].name);
+	 		console.log(data.tracks.items[i].preview_url);
+	 		console.log(data.tracks.items[i].album.name);
+	 	}
+
+	 	console.log("");
+	 	liriStart();
+		 
+	});
+
+}
+// spotifySearch() ==========================================
+
+
+function concat (array) {
+	if (array.length === 1) {
+		return array[0];
+	}
+
+	for(var i = 0; i < array.length; i++) {
+
+	}
+}
