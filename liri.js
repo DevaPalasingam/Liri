@@ -31,6 +31,10 @@ function liriStart() {
 		if (checkString[0] === "my-tweets") {
 			lastTweets();
 		}
+
+		else if (checkString[0] === "do-what-it-says") {
+			doIt();
+		}
 		
 		//checks for spotify-this-song and input song. If no song is input, will default to "The Sign"
 		else if (checkString[0] === "spotify-this-song") {
@@ -74,6 +78,7 @@ function liriStart() {
 			console.log("my-tweets");
 			console.log("spotify-this-song <insert song name>");
 			console.log("movie-this <insert movie name>");
+			console.log("do-what-it-says");
 			console.log("goodbye");
 			console.log("");
 			liriStart();
@@ -85,7 +90,73 @@ function liriStart() {
 
 // doIt() - this function will read the random.txt and do whatever is written in it
 function doIt() {
+	fs.readFile("random.txt", "utf8", function(err, data) {
+		if (err) {
+			console.log(err);
+			return;
+		}
 
+		//splits input data into command and if there's a parameter
+		data = data.split(",");
+		
+
+		// if a parameter was given, this will remove the quotes around it
+		if(data.length > 1) {
+			var data[1] = data[1].substring(1, data[1].length-1);
+		}
+
+
+
+		// =================================================
+		// this section of code was copied from the liriStart() function
+
+		if (data[0] === "my-tweets") {
+			lastTweets();
+		}
+
+		else if (data[0] === "do-what-it-says") {
+			doIt();
+		}
+		
+		//checks for spotify-this-song and input song. If no song is input, will default to "The Sign"
+		else if (data[0] === "spotify-this-song") {
+			//this checks if user input a song
+			if(data.length > 1) {
+				//if user put in a song, this will splice out the initial command and then will put additional words in an array
+				var sendString = data[1].splice(1);
+				//this will then concat those additional words back together
+				var inputSong = concat(sendString);
+				spotifySearch(inputSong);
+			}
+			//if no input song was put in, will default to "The Sign"
+			else {
+				spotifySearch("The Sign")
+			}
+		}
+
+		//checks for movie-this and input movie. If no movie is input, will default to "Mr. Nobody"
+		else if (data[0] === "movie-this") {
+			if(data.length > 1) {
+				//if user put in a movie, this will splice out the initial command and then will put additional words in an array
+				var sendString = data[1].splice(1);
+				//this will then concat those additional words back together
+				var inputMovie = concatPlus(sendString);
+				movieLookup(inputMovie);
+			}
+			//if no input movie was put in, will default to "Mr. Nobody"
+			else {
+				movieLookup("mr+nobody");
+			}
+		}
+
+		
+		else if (data[0] === "goodbye") {
+			liriEnd();
+		}
+		// this section of code was copied from the liriStart() function
+		// ================================================
+
+	});
 }
 // doIt() ==============================================
 
