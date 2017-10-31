@@ -73,6 +73,7 @@ function liriStart() {
 		}
 		
 		else {
+			console.log("");
 			console.log("I'm sorry, here are your options:")
 			console.log("");
 			console.log("my-tweets");
@@ -238,15 +239,31 @@ function movieLookup(userInput) {
 	request(movieUrl, function (error, response, body) {
 	if (!error) {
 		var movieInfo = JSON.parse(body);
-		console.log("Title: " + movieInfo.Title);
-		console.log("Year: " + movieInfo.Year);
-		console.log("IMDB Rating: " + movieInfo.Ratings[0].Value);
-		console.log("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value);
-		console.log("Country: " + movieInfo.Country);
-		console.log("Language: " + movieInfo.Language);
-		console.log("Plot: " + movieInfo.Plot);
-		console.log("Actors: " + movieInfo.Actors);
-		console.log("");
+
+		// checks to see if the api found the input movie
+		if(movieInfo.Response === "False") {
+			console.log("Movie not found");
+			console.log("");
+		}
+
+		else {
+			console.log("Title: " + movieInfo.Title);
+			console.log("Year: " + movieInfo.Year);
+			
+			if(movieInfo.Ratings.length > 1) {
+
+			console.log("IMDB Rating: " + movieInfo.Ratings[0].Value);
+			console.log("Rotten Tomatoes Rating: " + movieInfo.Ratings[1].Value);
+			}
+
+
+
+			console.log("Country: " + movieInfo.Country);
+			console.log("Language: " + movieInfo.Language);
+			console.log("Plot: " + movieInfo.Plot);
+			console.log("Actors: " + movieInfo.Actors);
+			console.log("");
+		}
 		liriStart();
 	}
 });
