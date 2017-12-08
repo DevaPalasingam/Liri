@@ -11,21 +11,21 @@ Your own personal assistant. Liri, can check your recent tweets, look up movie r
 
 Using Node, run liri.js. From there, Liri will prompt you to type in a command. If you type in an invalid command, Liri will give you some options. 
 
-####my-tweets: 
+* my-tweets: 
 Liri will print the last 20 things that you tweeted.
 
-####spotify-this-song: 
+* spotify-this-song: 
 Liri will look up the song that you type in.
 Example: "spotify-this-song thousand miles"
 
-####movie-this:
+* movie-this:
 Liri will look up the movie that you type in.
 Example: "movie-this incredibles"
 
-####do-what-it-says:
+* do-what-it-says:
 Inside the file there's a document called random.txt. You can replace the text with a command. Liri will read the document and run whatever command is in the document.
 
-####goodbye
+* goodbye
 Liri will say goodbye to you and then will shut off.
 
 
