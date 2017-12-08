@@ -1,6 +1,6 @@
 # Project Title
 
-My own personal assistant. Liri, can check my recent tweets, look up movie reviews and songs on spotify, and be my friend.
+Your own personal assistant. Liri, can check your recent tweets, look up movie reviews and songs on spotify, and be your friend.
 
 ![Alt text](/img/liri.jpg?raw=true)
 ![Alt text](/img/liri2.jpg?raw=true)
@@ -12,7 +12,7 @@ My own personal assistant. Liri, can check my recent tweets, look up movie revie
 Using Node, run liri.js. From there, Liri will prompt you to type in a command. If you type in an invalid command, Liri will give you some options. 
 
 ####my-tweets: 
-Liri will print the last 20 things that I tweeted.
+Liri will print the last 20 things that you tweeted.
 
 ####spotify-this-song: 
 Liri will look up the song that you type in.
@@ -31,8 +31,10 @@ Liri will say goodbye to you and then will shut off.
 
 ### What you'll need
 
+* Before you get started you'll need API keys from Twitter and Spotify linked to your accounts.
 * In order to run Liri, you'll need to install Node.js. 
 * Then you'll need to run "npm install" so that you can install all of the packages.
+* You'll also need to export your API keys in a separate keys.js.
 * Then run "node liri.js".
 
 
