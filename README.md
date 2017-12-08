@@ -1,4 +1,4 @@
-# Project Title
+# Liri
 
 Your own personal assistant. Liri, can check your recent tweets, look up movie reviews and songs on spotify, and be your friend.
 
